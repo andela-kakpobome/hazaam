@@ -1,0 +1,8 @@
+{
+  "name": "hazaam",
+  "scripts": {
+    "postdeploy": ""
+  },
+  "env": {
+  },
+  "addons": []
