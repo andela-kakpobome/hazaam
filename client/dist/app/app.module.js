@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var router_1 = require('@angular/router');
+var fpaas_component_1 = require('./fpaas/fpaas.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -20,10 +21,14 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 router_1.RouterModule.forRoot([
-                    { path: 'fpaas', component: app_component_1.AppComponent }
+                    { path: '', component: app_component_1.AppComponent },
+                    { path: 'fpaas', component: fpaas_component_1.FpaasComponent }
                 ])
             ],
-            declarations: [app_component_1.AppComponent],
+            declarations: [
+                app_component_1.AppComponent,
+                fpaas_component_1.FpaasComponent
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

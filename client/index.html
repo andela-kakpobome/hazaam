@@ -16,7 +16,7 @@
     <script src="systemjs.config.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-orange.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
     <script>
         System.import('app').catch(function(err) { console.log(err); });
     </script>
@@ -26,6 +26,8 @@
     </style>
   </head>
   <body class="container">
-    <my-app></my-app>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <my-app></my-app>
+    </div>
   </body>
 </html>
