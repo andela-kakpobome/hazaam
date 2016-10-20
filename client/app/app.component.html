@@ -1,0 +1,24 @@
+<header class="mdl-layout__header">
+  <div class="hamburger mdl-layout__header-row mdl-color--red-700">
+    <!-- Title -->
+    <i class="material-icons material-spec-icon">menu</i>
+    <span class="mdl-layout-title">Hazaam</span>
+    <!-- Add spacer, to align navigation to the right -->
+    <div class="mdl-layout-spacer"></div>
+    <!-- Navigation. We hide it in small screens. -->
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+    </nav>
+  </div>
+</header>
+<div class="mdl-layout__drawer">
+  <span class="mdl-layout-title">Title</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+  </nav>
+</div>
+
+<!-- Routed views go here -->
+<router-outlet></router-outlet>
