@@ -1,1 +1,3 @@
 .DS_Store
+api/node-echoprint-server/config.js
+node_modules/
