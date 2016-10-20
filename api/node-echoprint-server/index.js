@@ -10,7 +10,7 @@ if (config.web_port < 1024 && process.getuid() !== 0)
   throw new Error('Binding to ports less than 1024 requires root privileges');
 
 // Start listening for web requests
-server.init();
+server.bootstrap();
 
 // If run_as_user is set, try to switch users
 if (config.run_as_user) {
