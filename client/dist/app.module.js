@@ -11,12 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
+var router_1 = require('@angular/router');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                router_1.RouterModule.forRoot([
+                    { path: 'fpaas', component: app_component_1.AppComponent }
+                ])
+            ],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
