@@ -1,0 +1,67 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="hamburger mdl-layout__header-row mdl-color--red-700">
+      <!-- Title -->
+      <i class="material-icons material-spec-icon">menu</i>
+      <span class="mdl-layout-title">Hazaam</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content mdl-color-text--white">
+    <div class="page-content mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col"></div>
+
+      <div class="about-fpaas mdl-cell mdl-cell--9-col">
+        <div class="content">
+          <h2>Music FPaaS</h2>
+          <h5 class="fpaas-full">Fingerprint as a Service</h5>
+        </div>
+
+        <div class="content">
+          <h4>What is FPaaS?</h4>
+          <h6 class="mdl-color-text--red-100">
+            No, it does not involve fingers :) . <br>
+            Songs have a unique feel, sound and identity, similar to fingerprints.
+            With the fingerprint as a service (FPaaS), you can generate a digital
+            representation of any song.
+          </h6>
+        </div>
+
+        <div class="content">
+          <h4>How Does It Work?</h4>
+          <h6 class="mdl-color-text--red-100">
+            When your song is uploaded to our platform, the fingerprint generator
+            computes time and hash pairs from the audio signal using advanced
+            signal processing to account for noise and modification. For more
+            details, find link <a href="#">here</a> and <a href="#">here</a>.
+          </h6>
+        </div>
+
+        <div class="content">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent
+           mdl-color-text--white">
+            Get My Fingerprint!
+          </button>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--1-col"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Routed views go here -->
+<router-outlet></router-outlet>
