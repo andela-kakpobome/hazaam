@@ -8,12 +8,12 @@ module.exports = {
 
   // Database settings
   db_user: 'root',
-  db_pass: 'makinwa37',
+  db_pass: 'Makinwa#37',
   db_database: 'hazaam',
-  db_host: 'localhost',
+  db_host: '127.0.0.1',
 
   // Set this to a system username to drop root privileges
-  run_as_user: 'makinwa37',
+  run_as_user: 'kesiena.akp',
 
   // Filename to log to
   log_path: __dirname + '/logs/echoprint.log',

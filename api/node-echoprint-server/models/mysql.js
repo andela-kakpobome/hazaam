@@ -34,7 +34,7 @@ client.connect();
  */
 function fpQuery(fp, rows, callback) {
   var fpCodesStr = fp.codes.join(',');
-  
+
   // Get the top N matching tracks sorted by score (number of matched codes)
   var sql = 'SELECT track_id,COUNT(track_id) AS score ' +
     'FROM codes ' +
@@ -45,7 +45,7 @@ function fpQuery(fp, rows, callback) {
   client.query(sql, [], function(err, matches) {
     if (err) return callback(err, null);
     if (!matches || !matches.length) return callback(null, []);
-    
+
     var trackIDs = new Array(matches.length);
     var trackIDMap = {};
     for (var i = 0; i < matches.length; i++) {
@@ -54,7 +54,7 @@ function fpQuery(fp, rows, callback) {
       trackIDMap[trackID] = i;
     }
     var trackIDsStr = trackIDs.join('","');
-    
+
     // Get all of the matching codes and their offsets for the top N matching
     // tracks
     sql = 'SELECT code,time,track_id ' +
@@ -63,12 +63,12 @@ function fpQuery(fp, rows, callback) {
       'AND track_id IN ("' + trackIDsStr + '")';
     client.query(sql, [], function(err, codeMatches) {
       if (err) return callback(err, null);
-      
+
       for (var i = 0; i < codeMatches.length; i++) {
         var codeMatch = codeMatches[i];
         var idx = trackIDMap[codeMatch.track_id];
         if (idx === undefined) continue;
-        
+
         var match = matches[idx];
         if (!match.codes) {
           match.codes = [];
@@ -77,7 +77,7 @@ function fpQuery(fp, rows, callback) {
         match.codes.push(codeMatch.code);
         match.times.push(codeMatch.time);
       }
-      
+
       callback(null, matches);
     });
   });
@@ -142,7 +142,7 @@ function addTrack(artistID, fp, callback) {
   var length = fp.length;
   if (typeof length === 'string')
     length = parseInt(length, 10);
-  
+
   // Sanity checks
   if (!artistID)
     return callback('Attempted to add track with missing artistID', null);
@@ -150,7 +150,7 @@ function addTrack(artistID, fp, callback) {
     return callback('Attempted to add track with invalid duration "' + length + '"', null);
   if (!fp.codever)
     return callback ('Attempted to add track with missing code version (codever field)', null);
-  
+
   var sql = 'INSERT INTO tracks ' +
     '(codever,name,artist_id,length,import_date) ' +
     'VALUES (?,?,?,?,NOW())';
@@ -159,15 +159,15 @@ function addTrack(artistID, fp, callback) {
   {
     if (err) return callback(err, null);
     if (info.affectedRows !== 1) return callback('Track insert failed', null);
-    
+
     var trackID = info.insertId;
     var tempName = temp.path({ prefix: 'echoprint-' + trackID, suffix: '.csv' });
-    
+
     // Write out the codes to a file for bulk insertion into MySQL
     log.debug('Writing ' + fp.codes.length + ' codes to temporary file ' + tempName);
     writeCodesToFile(tempName, fp, trackID, function(err) {
       if (err) return callback(err, null);
-      
+
       // Bulk insert the codes
       log.debug('Bulk inserting ' + fp.codes.length + ' codes for track ' + trackID);
       sql = 'LOAD DATA LOCAL INFILE ? IGNORE INTO TABLE codes';
@@ -194,12 +194,12 @@ function writeCodesToFile(filename, fp, trackID, callback) {
     if (i === fp.codes.length)
       file.end();
   };
-  
+
   var file = fs.createWriteStream(filename);
   file.on('drain', keepWriting);
   file.on('error', callback);
   file.on('close', callback);
-  
+
   keepWriting();
 }
 
