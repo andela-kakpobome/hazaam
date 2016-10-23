@@ -74,7 +74,7 @@ exports.ingest = function(req, res) {
     fp.track = track;
     fp.length = parseInt(length);
     fp.artist = artist;
-    
+
     fingerprinter.ingest(fp, function(err, result) {
       if (err) {
         log.error('Failed to ingest track: ' + err);

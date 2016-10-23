@@ -1,31 +1,22 @@
 /**
 * Routes Module
+*
+* Aggregate all route endpoints here, effectively making
+* this the entry/bootstrapping point for all routes
 */
 
-//import other modules
-const api = require('../controllers/api');
-const debug = require('../controllers/debug');
+const express = require('express');
+const router = express.Router();
 
-module.exports = function ( router ) {
+const fingerprintRoutes = require('./fingerprints');
 
-  /**
-  * Query Endpoint
-  */
-  router.route('/query')
-        .get(api.query);
+//create new express instance to mount resource routes
+const mount = new express();
 
-  /**
-  * Ingest Endpoint
-  */
-  router.route('/ingest')
-        .post(api.ingest);
+module.exports = function () {
 
-  /**
-  * Debug Endpoint
-  */
-  router.route('/debug')
-        .get(debug.debugQuery)
-        .post(debug.debugQuery);
+  //mount routes for the fingerprint resource
+  mount.use('/fingerprints',fingerprintRoutes(router));
 
-  return router;
+  return mount;
 };
