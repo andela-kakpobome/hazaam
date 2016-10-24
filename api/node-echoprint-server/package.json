@@ -2,7 +2,8 @@
   "name": "echoprint-server",
   "version": "0.1.0",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "mocha --reporter spec specs/**/*.js"
   },
   "dependencies": {
     "async": "0.2.6",
@@ -12,6 +13,8 @@
     "jade": "0.28.2",
     "mocha": "^3.1.2",
     "mysql": "2.0.0-alpha8",
+    "should": "^11.1.1",
+    "supertest": "^2.0.1",
     "temp": "0.5.0",
     "winston": "0.6.2"
   },
