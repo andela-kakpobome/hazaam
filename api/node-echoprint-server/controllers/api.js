@@ -15,8 +15,8 @@ exports.query = function(req, res) {
        .send({ error: 'Missing code' });
   }
 
-  const codeVer = url.query.version;
-  if (codeVer != config.codever) {
+  const codeVersion = url.query.version;
+  if (codeVersion != config.codever) {
     res.status(400)
        .send({ error: 'Missing or invalid version' });
   }
@@ -28,7 +28,7 @@ exports.query = function(req, res) {
          .send({ error: 'Failed to decode codes for query: ' + err });
     }
 
-    fp.codever = codeVer;
+    fp.codever = codeVersion;
 
     fingerprinter.bestMatchForQuery(fp, config.code_threshold, function(err, result) {
       if (err) {
@@ -56,17 +56,17 @@ exports.query = function(req, res) {
  */
 exports.ingest = function(req, res) {
   const code = req.body.code;
-  const codeVer = req.body.version;
+  const codeVersion = req.body.version;
   const length = req.body.length;
   const track = req.body.track;
   const artist = req.body.artist;
 
   if (!code)
     res.status(500).send({ error: 'Missing "code" field' });
-  if (!codeVer)
+  if (!codeVersion)
     res.status(500).send({ error: 'Missing "version" field' });
-  if (codeVer != config.codever)
-    res.status(500).send({ error: 'Version "' + codeVer + '" does not match required version "' + config.codever + '"' }););
+  if (codeVersion != config.codever)
+    res.status(500).send({ error: 'Version "' + codeVersion + '" does not match required version "' + config.codever + '"' }););
   if (isNaN(parseInt(length, 10)))
     res.status(500).send({ error: 'Missing or invalid "length" field' });
   if (!track)
@@ -80,7 +80,7 @@ exports.ingest = function(req, res) {
       res.status(500).send({ error: 'Failed to decode codes for ingest: ' + err });
     }
 
-    fp.codever = codeVer;
+    fp.codever = codeVersion;
     fp.track = track;
     fp.length = parseInt(length);
     fp.artist = artist;
