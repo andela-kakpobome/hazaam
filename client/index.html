@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- NGRoute -->
+    <base href="/">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>My Angular 2 App</title>
-
-    <!--  css -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
-      media="screen" title="no title" charset="utf-8">
-    <style media="screen">
-      body { padding: 50px 0; }
-    </style>
-
     <!-- js -->
     <!-- load the dependencies -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -20,11 +15,20 @@
     <!-- load our angular app with systemjs -->
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="systemjs.config.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-orange.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <script>
         System.import('app').catch(function(err) { console.log(err); });
     </script>
+
+    <style media="screen">
+      body { background-color: #F44336 }
+    </style>
   </head>
   <body class="container">
-    <my-app></my-app>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <my-app></my-app>
+    </div>
   </body>
 </html>

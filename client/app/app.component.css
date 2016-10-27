@@ -1,0 +1,9 @@
+.mdl-layout__header {
+  position: fixed;
+}
+
+.hamburger .material-spec-icon {
+  vertical-align: middle;
+  margin-right: 0.5em;
+  font-weight: 300;
+}

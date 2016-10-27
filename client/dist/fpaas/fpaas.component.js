@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var FpaasComponent = (function () {
+    function FpaasComponent() {
     }
-    AppComponent = __decorate([
+    FpaasComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            templateUrl: './app/app.component.html',
-            styleUrls: ['./app/app.component.css']
+            selector: 'fpaas',
+            templateUrl: './app/fpaas/fpaas.component.html',
+            styleUrls: ['./app/fpaas/fpaas.component.css']
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], FpaasComponent);
+    return FpaasComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.FpaasComponent = FpaasComponent;
+//# sourceMappingURL=fpaas.component.js.map

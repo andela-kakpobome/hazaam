@@ -1,7 +1,7 @@
 {
   "name": "hazaam-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hazaam from Shazam.",
   "main": "index.js",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\"  \"npm run lite\"",
@@ -11,8 +11,12 @@
     "typings": "typings",
     "postinstall": "typings install"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andela-kakpobome/hazaam.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Hazaam",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^2.2.0",
@@ -30,6 +34,7 @@
     "@angular/platform-browser-dynamic": "^2.0.1",
     "@angular/router": "^3.0.1",
     "@angular/upgrade": "^2.0.1",
+    "angular2-mdl": "^2.2.1",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "^5.0.0-beta.12",
