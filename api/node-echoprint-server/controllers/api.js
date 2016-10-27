@@ -66,7 +66,7 @@ exports.ingest = function(req, res) {
   if (!codeVer)
     res.status(500).send({ error: 'Missing "version" field' });
   if (codeVer != config.codever)
-    res.status(500).send({ error: 'Version "' + codeVer + '" does not match required version "' + config.codever + '"' }););
+    res.status(500).send({ error: 'Version "' + codeVer + '" does not match required version "' + config.codever + '"' });
   if (isNaN(parseInt(length, 10)))
     res.status(500).send({ error: 'Missing or invalid "length" field' });
   if (!track)
