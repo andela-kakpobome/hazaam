@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule }   from '@angular/router';
 import { FpaasComponent } from './fpaas/fpaas.component'
-import { FingerPrintComponent } from './fpaas/fingerprint.component'
+import { FingerPrintComponent } from './fpaas/fingerprint/fingerprint.component'
 
 @NgModule({
     imports: [

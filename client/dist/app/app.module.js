@@ -13,7 +13,7 @@ var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var router_1 = require('@angular/router');
 var fpaas_component_1 = require('./fpaas/fpaas.component');
-var fingerprint_component_1 = require('./fpaas/fingerprint.component');
+var fingerprint_component_1 = require('./fpaas/fingerprint/fingerprint.component');
 var AppModule = (function () {
     function AppModule() {
     }
