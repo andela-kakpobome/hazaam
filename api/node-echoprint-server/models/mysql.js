@@ -27,7 +27,7 @@ var client = mysql.createConnection({
   database: config.db_database,
   host: config.db_host
 });
-client.connect();
+//client.connect();
 
 /**
  *
