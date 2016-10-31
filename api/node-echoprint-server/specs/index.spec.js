@@ -20,8 +20,9 @@ describe('[GET] Index Route', () => {
                 .expect('Content-Type',/json/)
                 .end((err, response) => {
                   if(err) throw err;
-                  
-                  response.body.should.have.property('message').eql('Welcome to the Hazaam API');
+
+                  response.body.should.have.property('message')
+                               .eql('Welcome to the Hazaam API');
                   done();
                 });
   });
