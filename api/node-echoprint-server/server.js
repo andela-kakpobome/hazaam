@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const routes = require('./routes');
 
+const ENV = process.env.NODE_ENV || 'development';
+
 exports.bootstrap = bootstrap;
 
 /**
@@ -24,48 +26,43 @@ function bootstrap() {
   app.use(bodyParser.json());
 
   //log all requests
-<<<<<<< HEAD
   app.use(function (req,res,next) {
 
+    //make sure all responses default to json
+    res.setHeader('Content-Type','application/json');
+    
     const remoteAddress =
       (req.socket && (req.socket.remoteAddress
                       || (req.socket.socket &&
                             req.socket.socket.remoteAddress)));
-=======
-  app.use(function ( req,res,next ) {
-
-    const remoteAddress =
-      (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
->>>>>>> development
 
     let message = remoteAddress +
                   ' - - [' + (new Date()).toUTCString() + ']' +
                   ' "' + req.method + ' ' + req.url +
-<<<<<<< HEAD
                   ' HTTP/' + req.httpVersionMajor + '.' + req.httpVersionMinor
                   + '" ' + (req.headers['user-agent'] || '') + '"';
-=======
-                  ' HTTP/' + req.httpVersionMajor + '.' + req.httpVersionMinor + '" ' +
-                  (req.headers['user-agent'] || '') + '"';
->>>>>>> development
 
-    log.info(message);
+    if (ENV !== 'test') {
+      log.info(message);
+    }
+
     next();
   });
 
-  //mount endpoints on a /api/v(\d) prefix
-<<<<<<< HEAD
-  app.use('/api/v1',routes());
-=======
-  app.use('/api/v1',routes(router));
->>>>>>> development
+  //redirect the index route
+  app.get('/', (req,res) => {
 
-  //start the app
-  app.listen(config.web_port,function() {
-    log.info('FPaaS now listening on port '+config.web_port);
-<<<<<<< HEAD
+    res.status(301).setHeader('Location', '//' + req.headers.host + '/api/v1/');
+    res.send();
   });
-=======
-  })
->>>>>>> development
+
+  //mount endpoints on a /api/v(\d) prefix
+  app.use('/api/v1',routes());
+
+  //start the app but only log info when ENV is not TEST
+  app.listen(config.web_port,function() {
+      log.info('FPaaS now listening on port ' + config.web_port);
+  });
+
+  return app;
 }

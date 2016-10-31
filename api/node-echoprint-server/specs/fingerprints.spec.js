@@ -1,9 +1,9 @@
 const should = require('should');
 const request = require('supertest');
 
-describe('Fingerprint Resource',function () {
+describe('Fingerprint Resource', () => {
 
-  it('should pass this test',function () {
+  it('should pass this test', () => {
 
     "hi".should.be.an.instanceof.String;
   });

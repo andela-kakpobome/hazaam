@@ -1,7 +1,8 @@
-const urlParser = require('url');
-const log = require('winston');
 const fingerprinter = require('./fingerprinter');
+const log = require('winston');
 const server = require('../server');
+const urlParser = require('url');
+
 const config = require('../config');
 
 /**
@@ -30,7 +31,7 @@ exports.query = function(req, res) {
 
     fp.codever = codeVer;
 
-    fingerprinter.bestMatchForQuery(fp, config.code_threshold, function(err, result) {
+    fingerprinter.bestMatchForQuery(fp, config.code_threshold, (err, result) => {
       if (err) {
         log.warn('Failed to complete query: ' + err);
         res.status(500)
@@ -66,7 +67,11 @@ exports.ingest = function(req, res) {
   if (!codeVer)
     res.status(500).send({ error: 'Missing "version" field' });
   if (codeVer != config.codever)
-    res.status(500).send({ error: 'Version "' + codeVer + '" does not match required version "' + config.codever + '"' }););
+    res.status(500)
+       .send({
+          error: 'Version "' + codeVer + '" does not match required version "'
+                  + config.codever + '"'
+      });
   if (isNaN(parseInt(length, 10)))
     res.status(500).send({ error: 'Missing or invalid "length" field' });
   if (!track)
@@ -77,7 +82,9 @@ exports.ingest = function(req, res) {
   fingerprinter.decodeCodeString(code, function(err, fp) {
     if (err || !fp.codes.length) {
       log.error('Failed to decode codes for ingest: ' + err);
-      res.status(500).send({ error: 'Failed to decode codes for ingest: ' + err });
+      res.status(500).send({
+        error: 'Failed to decode codes for ingest: ' + err
+      });
     }
 
     fp.codever = codeVer;
