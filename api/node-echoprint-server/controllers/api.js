@@ -1,13 +1,27 @@
-const urlParser = require('url');
+const echoprintCodegen = require('echoprint-codegen');
+const fs = require('fs');
+const glob = require('glob');
 const log = require('winston');
+const multer = require('multer');
+const urlParser = require('url');
+
+const config = require('../config');
 const fingerprinter = require('./fingerprinter');
 const server = require('../server');
-const config = require('../config');
 
 /**
  * Querying for the closest matching track.
+ *
+ * Queries the fingerprint database for the closest matching track of the code
+ * snippet passed in. The audio snippet to be searched for is first
+ * fingerprinted and then that code is matched against the database of
+ * 'full length' songs that have been ingested into the database.
+ *
+ * The following are sent as query parameters
+ * param {String} code
+ * param {String} version
  */
-exports.query = function(req, res) {
+exports.query = (req, res) => {
   const url = urlParser.parse(req.url, true);
   const code = url.query.code;
   if (!code) {
@@ -21,7 +35,7 @@ exports.query = function(req, res) {
        .send({ error: 'Missing or invalid version' });
   }
 
-  fingerprinter.decodeCodeString(code, function(err, fp) {
+  fingerprinter.decodeCodeString(code, (err, fp) => {
     if (err) {
       log.error('Failed to decode codes for query: ' + err);
       res.status(500)
@@ -30,7 +44,8 @@ exports.query = function(req, res) {
 
     fp.codever = codeVer;
 
-    fingerprinter.bestMatchForQuery(fp, config.code_threshold, function(err, result) {
+    fingerprinter.bestMatchForQuery(fp, config.code_threshold,
+    (err, result) => {
       if (err) {
         log.warn('Failed to complete query: ' + err);
         res.status(500)
@@ -98,5 +113,75 @@ exports.ingest = function(req, res) {
       result.success = true;
       res.status(200).send(result);
     });
+  });
+};
+
+/**
+* Upload
+*
+* Validates and uploads files
+*
+* @param {Object} req
+* @param {Object} res
+*/
+function upload(req,res) {
+
+  return new Promise((resolve,reject) => {
+
+    const doUpload = multer({dest:'./uploads'}).any();
+    doUpload(req, res, (err) => {
+
+       if (err) throw err;
+
+       if (!req.files) reject({error: 'No file(s) uploaded'});
+
+       //pluck uploaded file
+       const file = req.files[0];
+
+       if (file.size > 10485760) {
+         reject({error: 'Max file size of 10mb'});
+       }
+
+       if (!/(?:audio\/.+)/.test(file.mimetype)) {
+         reject({error: 'Only audio files allowed'});
+       }
+
+       resolve(file);
+    });
+  });
+}
+
+/**
+* Create
+*
+* Receives a full length song/audio file and creates the fingerprint.
+* It also appends/ingests the song's details into the database and also
+* returns the generated fingerprint.
+*
+* The following constitute the compulsory fields
+* that shape the required payload
+* param {Object} audio
+*/
+exports.create = (req, res) => {
+
+  upload(req,res)
+  .then((file) => {
+
+    //generate the Fingerprint
+    echoprintCodegen(file.path,(err, data) => {
+      if (err) res.status(500).send({error:err});
+
+      //we're done, clear all uploads
+      glob('./uploads/**',(err,files) => {
+        files.forEach((file) => {
+          if (file !== './uploads') fs.unlink(file);
+        });
+      });
+
+      res.send(data);
+    });
+  })
+  .catch((err) => {
+    res.status(400).send(err);
   });
 };

@@ -2,9 +2,12 @@
  * Simple HTTP server module
  */
 const log = require('winston');
+const uploader = require('express-fileupload');
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const path = require('path');
+
 const config = require('./config');
 const routes = require('./routes');
 
@@ -26,11 +29,11 @@ function bootstrap() {
   app.use(bodyParser.json());
 
   //log all requests
-  app.use(function (req,res,next) {
+  app.use((req,res,next) => {
 
     //make sure all responses default to json
     res.setHeader('Content-Type','application/json');
-    
+
     const remoteAddress =
       (req.socket && (req.socket.remoteAddress
                       || (req.socket.socket &&
@@ -60,7 +63,7 @@ function bootstrap() {
   app.use('/api/v1',routes());
 
   //start the app but only log info when ENV is not TEST
-  app.listen(config.web_port,function() {
+  app.listen(config.web_port, () => {
       log.info('FPaaS now listening on port ' + config.web_port);
   });
 
