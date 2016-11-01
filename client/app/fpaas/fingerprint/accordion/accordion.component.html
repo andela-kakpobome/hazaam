@@ -1,0 +1,14 @@
+<div class="fingerprint-data {{doAccordion(data.indexOf(set))}} mdl-color--white"
+  *ngFor="let set of data">
+  <div (click)="activate(data.indexOf(set))" class="data-header">
+    <i class="material-icons mdl-color-text--grey-400">play_arrow</i>
+    <span class="mdl-color-text--grey-600">{{set.title}}</span>
+  </div>
+
+  <div class="data-body mdl-color-text--grey-400">
+    <div class="label-value" *ngFor="let label of getKeys(set)">
+      <p> {{label}}: </p>
+      <p> {{set.rows[label]}} </p>
+    </div>
+  </div>
+</div>

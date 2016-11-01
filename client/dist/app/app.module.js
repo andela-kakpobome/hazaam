@@ -14,6 +14,7 @@ var app_component_1 = require('./app.component');
 var router_1 = require('@angular/router');
 var fpaas_component_1 = require('./fpaas/fpaas.component');
 var fingerprint_component_1 = require('./fpaas/fingerprint/fingerprint.component');
+var accordion_component_1 = require('./fpaas/fingerprint/accordion/accordion.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +31,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 fpaas_component_1.FpaasComponent,
-                fingerprint_component_1.FingerPrintComponent
+                fingerprint_component_1.FingerPrintComponent,
+                accordion_component_1.AccordionComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

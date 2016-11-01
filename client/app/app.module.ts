@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { RouterModule }   from '@angular/router';
 import { FpaasComponent } from './fpaas/fpaas.component';
 import { FingerPrintComponent } from './fpaas/fingerprint/fingerprint.component';
+import { AccordionComponent } from './fpaas/fingerprint/accordion/accordion.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FingerPrintComponent } from './fpaas/fingerprint/fingerprint.component'
   declarations: [
     AppComponent,
     FpaasComponent,
-    FingerPrintComponent
+    FingerPrintComponent,
+    AccordionComponent
   ],
   bootstrap: [ AppComponent ]
 })

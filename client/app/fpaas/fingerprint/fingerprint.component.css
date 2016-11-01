@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.about-fpaas {
+  margin: 6em 1em 1em 1.2em;
+  padding: 3em;
+}
+
+.about-fpaas h5.fpaas-full {
+  font-weight: 300;
+}
+
+.about-fpaas .content {
+  margin-bottom: 4.5em;
+}
+
+.content h6 {
+  font-size: 18px;
+  line-height: 1.5em;
+  font-weight: 300;
+  margin-top: 0.75em;
+}
+
+.content:last-child h6 {
+  margin-bottom: 1.25em;
+}
+
+.get-fingerprint {
+  margin-top: 6em;
+  padding: 3.375em 0 3em;
+}
+
+.upload-song {
+  border: 2px dashed #BDBDBD;
+  border-radius: 3px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 4.5em 3em;
+}
+
+.upload-song h6 {
+  font-weight: 300;
+}
+
+.upload-song, .fingerprint-data {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.fingerprint-data:last-child {
+  margin-top: 0.75em;
+}
+
+.fingerprint-data {
+  box-sizing: border-box;
+  margin-top: 3em;
+  height: 4.5em;
+  padding: 1.5em;
+  overflow: hidden;
+  transition: height 300ms ease-out;
+}
+
+.fingerprint-data i {
+  transition: all 300ms ease-in-out;
+}
+
+/** accordion open **/
+.open-accordion {
+  height: 16.5em;
+  transition: height 300ms ease-in;
+}
+
+.open-accordion i {
+  transform: rotate(90deg);
+  transition: all 300ms ease-in-out;
+}
+
+.data-header {
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.data-header span {
+  position: relative;
+  top: -0.5em;
+  font-weight: 300;
+}
+
+.data-body {
+  padding: 1.5em 2em;
+  height: 9em;
+  overflow: scroll;
+}
+
+.data-body p{
+  font-weight: 300;
+  margin-bottom: 1.5em;
+}
+
+.data-body p span {
+  float: right;
+}
+
+.label-value {
+  overflow: auto;
+}
+
+.label-value p {
+  float: left;
+  width: 9em;
+}
+
+.label-value p:first-of-type {
+  text-transform: capitalize;
+}
+
+.label-value p:last-of-type {
+  margin-left: 3em;
+  width: 18em;
+}
+
+.label-value p {
+  word-wrap: break-word;
+  line-height: 140%;
+}
+
+.download {
+  width: 65%;
+  margin: 0.75em auto 0 auto;
+}
+
+.download button {
+  float: right;
+  width: 15em;
+  height: 2.75em;
+  text-transform: capitalize;
+  font-weight: 300;
+}
+
+.download .mdl-button {
+  border-radius: 0;
+}
