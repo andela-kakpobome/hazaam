@@ -13,8 +13,14 @@ module.exports = function (router) {
   /**
   * Query Endpoint
   */
-  router.route('/query')
+  router.route('/')
         .get(api.query);
+
+  /**
+  * Create Endpoint
+  */
+  router.route('/')
+        .post(api.create);
 
   /**
   * Ingest Endpoint
