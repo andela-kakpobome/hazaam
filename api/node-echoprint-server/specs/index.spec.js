@@ -16,14 +16,14 @@ describe('[GET] Index Route', () => {
   });
 
   it('should show the welcome message', (done) => {
-    request(app)
-      .get('/api/v1')
+    request(app).get('/api/v1')
       .expect(200)
       .expect('Content-Type',/json/)
       .end((err, response) => {
         if(err) throw err;
 
-        response.body.should.have.property('message').eql('Welcome to the Hazaam API');
+        response.body.should.have.property('message')
+                     .eql('Welcome to the Hazaam API');
         done();
       });
   });

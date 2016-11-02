@@ -19,7 +19,7 @@ describe('Fingerprint Resource', () => {
         .end((err,response) => {
           if (err) throw err;
 
-          response.body.should.have.property('error').eql('No file(s) uploaded');
+          response.body.should.have.property('error').eql('No file uploaded');
           done();
        });
     });

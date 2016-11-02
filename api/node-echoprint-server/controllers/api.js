@@ -46,6 +46,7 @@ exports.query = (req, res) => {
 
     fingerprinter.bestMatchForQuery(fp, config.code_threshold,
     (err, result) => {
+
       if (err) {
         log.warn('Failed to complete query: ' + err);
         res.status(500)
@@ -81,7 +82,11 @@ exports.ingest = function(req, res) {
   if (!codeVer)
     res.status(500).send({ error: 'Missing "version" field' });
   if (codeVer != config.codever)
-    res.status(500).send({ error: 'Version "' + codeVer + '" does not match required version "' + config.codever + '"' });
+    res.status(500)
+       .send({
+          error: `Version ${codeVer} does not match required version
+                  ${config.codever}`
+      });
   if (isNaN(parseInt(length, 10)))
     res.status(500).send({ error: 'Missing or invalid "length" field' });
   if (!track)
@@ -91,8 +96,10 @@ exports.ingest = function(req, res) {
 
   fingerprinter.decodeCodeString(code, function(err, fp) {
     if (err || !fp.codes.length) {
-      log.error('Failed to decode codes for ingest: ' + err);
-      res.status(500).send({ error: 'Failed to decode codes for ingest: ' + err });
+      log.error(`Failed to decode codes for ingest: ${err}`);
+      res.status(500).send({
+        error: `Failed to decode codes for ingest: ${err}`
+      });
     }
 
     fp.codever = codeVer;
@@ -103,18 +110,34 @@ exports.ingest = function(req, res) {
     fingerprinter.ingest(fp, function(err, result) {
       if (err) {
         log.error('Failed to ingest track: ' + err);
-        res.status(500).send({ error: 'Failed to ingest track: ' + err });
+        res.status(500).send({ error: `Failed to ingest track: ${err}` });
       }
 
       const duration = new Date() - req.start;
-      log.debug('Ingested new track in ' + duration + 'ms. track_id=' +
-        result.track_id + ', artist_id=' + result.artist_id);
+      log.debug(`Ingested new track in ${duration} + 'ms. track_id='
+        ${result.track_id} artist_id=' ${result.artist_id}`);
 
       result.success = true;
       res.status(200).send(result);
     });
   });
 };
+
+/**
+* Validate Upload
+*
+* @param {Object} file object to validate
+*/
+function validateUpload(req, file, cb) {
+
+  //cb(new Error('Max file size of 10mb'),false);return;
+
+  if (!/(?:audio\/.+)/.test(file.mimetype)) {
+    cb(new Error('Only audio files allowed'),false);return;
+  }
+
+  cb(null, true);
+}
 
 /**
 * Upload
@@ -124,29 +147,48 @@ exports.ingest = function(req, res) {
 * @param {Object} req
 * @param {Object} res
 */
-function upload(req,res) {
+function upload(req, res) {
 
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve, reject) => {
 
-    const doUpload = multer({dest:'./uploads'}).any();
+    const doUpload = multer({
+      dest: './uploads',
+      fileFilter: validateUpload,
+      limits: {
+        fileSize: 10485760
+      }
+    }).any();
+
     doUpload(req, res, (err) => {
 
-       if (err) throw err;
+       if (err) {
 
-       if (!req.files) reject({error: 'No file(s) uploaded'});
+         const message = err.message === 'File too large' ?
+                         'Max file size of 10mb' : err.message;
 
-       //pluck uploaded file
-       const file = req.files[0];
-
-       if (file.size > 10485760) {
-         reject({error: 'Max file size of 10mb'});
+         //normalize error object shape
+         reject({error: message});
        }
 
-       if (!/(?:audio\/.+)/.test(file.mimetype)) {
-         reject({error: 'Only audio files allowed'});
-       }
+       if (!req.files) reject({error: 'No file uploaded'});
 
-       resolve(file);
+       resolve(req.files[0]);
+    });
+  });
+}
+
+/**
+* Wipe Files
+*
+* Wipes all files in a given directory
+*
+* @param {String} relative path of files to delete
+*/
+function wipeFiles(path) {
+
+  glob(path + '/**',(err, files) => {
+    files.forEach((file) => {
+      if (file !== path) fs.unlink(file);
     });
   });
 }
@@ -172,11 +214,7 @@ exports.create = (req, res) => {
       if (err) res.status(500).send({error:err});
 
       //we're done, clear all uploads
-      glob('./uploads/**',(err,files) => {
-        files.forEach((file) => {
-          if (file !== './uploads') fs.unlink(file);
-        });
-      });
+      wipeFiles('./uploads');
 
       res.send(data);
     });
