@@ -5,10 +5,10 @@ const log = require('winston');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const config = require('./config');
-const routes = require('./routes');
-
 const ENV = process.env.NODE_ENV || 'development';
+
+const config = ENV !== 'test' ? require('./config') : require('./config.sample');
+const routes = require('./routes');
 
 /**
 * Bootstrap
