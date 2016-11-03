@@ -3,7 +3,11 @@ const log = require('winston');
 
 const fingerprinter = require('./fingerprinter');
 const server = require('../server');
-const config = require('../config');
+
+const ENV = process.env.NODE_ENV || 'development';
+
+const config = ENV !== 'test' ? require('../config') : require('../config.sample');
+
 
 /**
  * Browser-friendly query debugging endpoint.

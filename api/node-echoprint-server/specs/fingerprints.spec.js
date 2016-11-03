@@ -21,7 +21,7 @@ describe('Fingerprint Resource', () => {
 
           response.body.should.have.property('error').eql('No file uploaded');
           done();
-       });
+        });
     });
 
     it('should only accept audio files', (done) => {
