@@ -7,7 +7,10 @@ var fs = require('fs');
 var mysql = require('mysql');
 var temp = require('temp');
 var log = require('winston');
-var config = require('../config');
+
+const ENV = process.env.NODE_ENV || 'development';
+
+const config = ENV !== 'test' ? require('../config') : require('../config.sample');
 
 exports.fpQuery = fpQuery;
 exports.getTrack = getTrack;

@@ -47,7 +47,7 @@ function bootstrap() {
 
   // redirect the index route
   app.get('/', (req, res) => {
-    res.status(301).setHeader(`Location, //${req.headers.host}/api/v1/`);
+    res.status(301).setHeader('Location', `//${req.headers.host}/api/v1/`);
     res.send();
   });
 

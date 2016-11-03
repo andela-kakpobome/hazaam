@@ -5,7 +5,9 @@ const log = require('winston');
 const multer = require('multer');
 const urlParser = require('url');
 
-const config = require('../config');
+const ENV = process.env.NODE_ENV || 'development';
+
+const config = ENV !== 'test' ? require('../config') : require('../config.sample');
 const fingerprinter = require('./fingerprinter');
 
 /**
@@ -193,7 +195,7 @@ function upload(req, res) {
 * @return {void}
 */
 function wipeFiles(path) {
-  glob(`${path} /**`, (err, files) => {
+  glob(`${path}/**`, (err, files) => {
     files.forEach((file) => {
       if (file !== path) fs.unlink(file);
     });
