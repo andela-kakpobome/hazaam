@@ -15,7 +15,8 @@ export class AccordionComponent {
     title: 'Fingerprint Data',
     rows: {
            "Code Count": 654,
-           Code: "eJzVmmuOJDcOhK-kFynpOKQe9z_CfuwF3eJzVmmuOJDcOhK-kFynpOKQe9z_CfuwF3"
+           Code: "eJzVmmuOJDcOhK-kFynpOKQe9z_" +
+            "CfuwF3eJzVmmuOJDcOhK-kFynpOKQe9z_CfuwF3"
          }
   },
   {
