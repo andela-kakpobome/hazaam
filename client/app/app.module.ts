@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { RouterModule }   from '@angular/router';
+
+import { AccordionComponent } from './fpaas/fingerprint/accordion/accordion.component';
 import { FpaasComponent } from './fpaas/fpaas.component';
 import { FingerPrintComponent } from './fpaas/fingerprint/fingerprint.component';
-import { AccordionComponent } from './fpaas/fingerprint/accordion/accordion.component';
+import { PluckKeysPipe } from './pipes/pluck-keys.pipe';
 
 @NgModule({
   imports: [
@@ -16,10 +18,11 @@ import { AccordionComponent } from './fpaas/fingerprint/accordion/accordion.comp
     ])
   ],
   declarations: [
+    AccordionComponent,
     AppComponent,
-    FpaasComponent,
     FingerPrintComponent,
-    AccordionComponent
+    FpaasComponent,
+    PluckKeysPipe
   ],
   bootstrap: [ AppComponent ]
 })
