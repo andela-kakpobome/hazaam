@@ -6,9 +6,12 @@
   </div>
 
   <div class="data-body mdl-color-text--grey-400">
-    <div class="label-value" *ngFor="let label of getKeys(set)">
+    <div class="label-value" *ngFor="let label of set | pluckKeys">
       <p> {{label}}: </p>
-      <p> {{set.rows[label]}} </p>
+      <p *ngIf=" set.rows[label] !== '' ">
+        {{set.rows[label]}}
+      </p>
+      <p *ngIf=" set.rows[label] === '' "> untitled</p>
     </div>
   </div>
 </div>

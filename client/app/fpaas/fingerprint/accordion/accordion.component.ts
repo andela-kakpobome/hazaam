@@ -10,7 +10,7 @@ export class AccordionComponent {
 
   accordionState: any = null;
   tab: string;
-  
+
   public data: any = [{
     title: 'Fingerprint Data',
     rows: {
@@ -21,7 +21,7 @@ export class AccordionComponent {
   {
     title: 'Metadata',
     rows: {
-           artist: 'untitled',
+           artist: '',
            release: 'untitled',
            title: 'untitled',
            genre: 'untitled',
