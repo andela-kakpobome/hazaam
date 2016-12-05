@@ -13,6 +13,8 @@ var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var router_1 = require('@angular/router');
 var fpaas_component_1 = require('./fpaas/fpaas.component');
+var fingerprint_component_1 = require('./fpaas/fingerprint/fingerprint.component');
+var accordion_component_1 = require('./fpaas/fingerprint/accordion/accordion.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,12 +24,15 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: app_component_1.AppComponent },
-                    { path: 'fpaas', component: fpaas_component_1.FpaasComponent }
+                    { path: 'fpaas', component: fpaas_component_1.FpaasComponent },
+                    { path: 'fpaas/fingerprint', component: fingerprint_component_1.FingerPrintComponent }
                 ])
             ],
             declarations: [
                 app_component_1.AppComponent,
-                fpaas_component_1.FpaasComponent
+                fpaas_component_1.FpaasComponent,
+                fingerprint_component_1.FingerPrintComponent,
+                accordion_component_1.AccordionComponent
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

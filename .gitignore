@@ -3,3 +3,5 @@ api/node-echoprint-server/config.js
 api/node-echoprint-server/uploads/
 node_modules/
 npm-debug.log
+api/node-echoprint-server/npm-debug.log
+client/dist
