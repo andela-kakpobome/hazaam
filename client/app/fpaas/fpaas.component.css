@@ -30,8 +30,7 @@
   text-decoration: none;
 }
 
-.content button {
-  width: 18em;
-  height: 3.75em;
+.content a.mdl-button {
+  padding: 0.5em 4em;
   text-transform: capitalize;
 }

@@ -1,0 +1,27 @@
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-color--red-700 mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Hazaam</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/fpaas">About FPaaS</a>
+        <a class="mdl-navigation__link" href="/fpaas/fingerprint">Fingerprint</a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Hazaam</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/fpaas">About FPaaS</a>
+      <a class="mdl-navigation__link" href="/fpaas/fingerprint">Fingerprint</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content mdl-color-text--white">
+    <!-- Routed views go here -->
+      <router-outlet></router-outlet>
+  </main>
+</div>

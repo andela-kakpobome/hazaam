@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule }   from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
 import { AccordionComponent } from './fpaas/fingerprint/accordion/accordion.component';
 import { FpaasComponent } from './fpaas/fpaas.component';
 import { FingerPrintComponent } from './fpaas/fingerprint/fingerprint.component';
@@ -22,6 +23,7 @@ import { PluckKeysPipe } from './pipes/pluck-keys.pipe';
     AppComponent,
     FingerPrintComponent,
     FpaasComponent,
+    HomeComponent,
     PluckKeysPipe
   ],
   bootstrap: [ AppComponent ]

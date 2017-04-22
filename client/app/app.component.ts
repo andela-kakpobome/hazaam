@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  templateUrl: './app/app.component.html',
-  styleUrls: ['./app/app.component.css']
+  templateUrl: './app/app.component.html'
 })
 
-export class AppComponent {}
+export class AppComponent {
+  friends = [
+    { age: 40, name: 'Jordan' },
+    { age: 30, name: 'Michael' }
+  ]
+}
