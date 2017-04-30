@@ -32,19 +32,31 @@
   padding: 3.375em 0 3em;
 }
 
-.upload-song {
+#filedrag
+{
+	display: none;
+	font-weight: bold;
+	cursor: default;
   border: 2px dashed #BDBDBD;
   border-radius: 3px;
   text-align: center;
   box-sizing: border-box;
-  padding: 4.5em 3em;
+  padding: 4.5em 3em;'
 }
 
-.upload-song h6 {
+#filedrag.hover
+{
+	color: #f00;
+	border-color: #F44336;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}
+
+#filedrag h6 {
   font-weight: 300;
 }
 
-.upload-song, .fingerprint-data {
+#filedrag, .fingerprint-data {
   width: 65%;
   margin: 0 auto;
 }

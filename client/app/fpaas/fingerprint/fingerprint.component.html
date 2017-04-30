@@ -32,7 +32,11 @@
     <div class="fingerprint mdl-cell mdl-cell--8-col mdl-color--red-100
       mdl-color-text--black">
       <div class="get-fingerprint">
-        <div class="upload-song mdl-color-text--grey-600">
+        <div class="upload-song mdl-color-text--grey-600" id="filedrag"
+        (dragover)="FileDragHover($event)"
+        (dragleave)="FileDragHover($event)"
+        (drop)="FileSelectHandler($event)"
+        >
           <h6>Drag/click to upload your song here</h6>
         </div>
 
