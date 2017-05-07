@@ -1,21 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { FingerPrintService } from '../../shared/fingerprint.service';
 import { AccordionComponent } from './accordion/accordion.component';
 
 @Component({
   selector: 'fingerprint',
   templateUrl: './app/fpaas/fingerprint/fingerprint.component.html',
-  styleUrls: ['./app/fpaas/fingerprint/fingerprint.component.css']
+  styleUrls: ['./app/fpaas/fingerprint/fingerprint.component.css'],
+  providers: [ FingerPrintService ]
 })
 
-export class FingerPrintComponent {
+export class FingerPrintComponent implements OnInit {
   $id(id) {
     return document.getElementById(id);
   }
 
-  Output(msg) {
-  	let m = this.$id("messages");
-  	m.innerHTML = msg + m.innerHTML;
+  constructor(private fingerprintService: FingerPrintService) {
+    console.log("Output;");
+    console.log(location.hostname);
+    console.log(document.domain);
+
+    console.log("document.URL : "+document.URL);
+    console.log("document.location.href : "+document.location.href);
+    console.log("document.location.origin : "+document.location.origin);
+    console.log("document.location.hostname : "+document.location.hostname);
+    console.log("document.location.host : "+document.location.host);
+    console.log("document.location.pathname : "+document.location.pathname);
+  }
+
+  prepareFile(file) {
+    const formData: any = new FormData;
+    formData.append("uploads[]", file[0], file[0]['name']);
+
+    return formData
   }
 
   FileDragHover(e) {
@@ -26,21 +43,18 @@ export class FingerPrintComponent {
 
   FileSelectHandler(e) {
     this.FileDragHover(e);
-
     let files = e.dataTransfer.files;
-    console.log(files);
-    // for(let i = 0, f; f = files[i]; i++) {
-    //   this.ParseFile(f);
-    // }
+    let parsedFile = this.prepareFile(files);
+
+    this.createFingerprint(parsedFile);
   }
 
-  ParseFile(file) {
-    this.Output(
-      "<p>File information: <strong>" + file.name +
-  		"</strong> type: <strong>" + file.type +
-  		"</strong> size: <strong>" + file.size +
-  		"</strong> bytes</p>"
-    );
+  createFingerprint(parsedFile) {
+    this.fingerprintService.create(parsedFile)
+      .then(
+        data => console.log("success", data),
+        error => console.log("error", error)
+      );
   }
 
   ngOnInit() {
